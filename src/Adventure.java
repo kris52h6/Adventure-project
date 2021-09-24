@@ -18,15 +18,44 @@ public class Adventure {
 
         Room currentRoom = room1;
 
-        room1.setConnections(null, room2, room4, null);
-        room2.setConnections(null, room3, null, room1);
-        room3.setConnections(null, null, room6, room2);
+        // Connect rooms
+        // connect r1 with r2/r4
+        room1.connectRoomsHorizontally(room2);
+        room1.connectRoomsVertically(room4);
+
+        //connect r2 with r3
+        room2.connectRoomsHorizontally(room3);
+
+        // connect r3 with r6
+        room3.connectRoomsVertically(room6);
+
+        // connect r4 with r7
+        room4.connectRoomsVertically(room7);
+
+        // connect r6 with r9
+        room6.connectRoomsVertically(room9);
+
+        // connect r8 with r7/r9/r5
+        room7.connectRoomsHorizontally(room8);
+        room8.connectRoomsHorizontally(room9);
+        room5.connectRoomsVertically(room8);
+
+
+
+
+        System.out.println(room1);
+        System.out.println(room2);
+
+
+/*        room1.setConnections(null, room2, room4, null);
+        room2.setConnections(null, room3, null, room1);*/
+        /*room3.setConnections(null, null, room6, room2);
         room4.setConnections(room1, null, room7, null);
         room5.setConnections(null, null, room8, null);
         room6.setConnections(room3, null, room9, null);
         room7.setConnections(room4, room8, null, null);
         room8.setConnections(room5, room9, null, room7);
-        room9.setConnections(room6, null, null, room8);
+        room9.setConnections(room6, null, null, room8);*/
 
 
         // Intro
