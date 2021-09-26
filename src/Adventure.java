@@ -18,11 +18,11 @@ public class Adventure {
 
         Room currentRoom = room1;
 
-        // map test
+        // map test (extra)
         System.out.println(currentRoom.getActiveRoom());
         currentRoom.switchMap();
         System.out.println(currentRoom.getActiveRoom());
-
+        //
 
         // Connect rooms
         // connect r1 with r2/r4

@@ -5,7 +5,7 @@ public class Room {
     private Room south;
     private Room west;
     private String description;
-    private boolean activeRoom;
+    private boolean activeRoom; // for map (extra)
 
     public Room(String name, String description) {
         this.name = name;
@@ -31,6 +31,7 @@ public class Room {
         }
     }
 
+    // for map (extra)
     public boolean getActiveRoom() {
         return activeRoom;
     }
@@ -42,6 +43,7 @@ public class Room {
             this.activeRoom = true;
         return activeRoom;
     }
+    //
 
     public String getName() {
         return name;
