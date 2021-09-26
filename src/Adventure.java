@@ -18,6 +18,12 @@ public class Adventure {
 
         Room currentRoom = room1;
 
+        // map test
+        System.out.println(currentRoom.getActiveRoom());
+        currentRoom.switchMap();
+        System.out.println(currentRoom.getActiveRoom());
+
+
         // Connect rooms
         // connect r1 with r2/r4
         room1.connectRoomsHorizontally(room2);
@@ -40,30 +46,12 @@ public class Adventure {
         room8.connectRoomsHorizontally(room9);
         room5.connectRoomsVertically(room8);
 
-
-
-
-        System.out.println(room1);
-        System.out.println(room2);
-
-
-/*        room1.setConnections(null, room2, room4, null);
-        room2.setConnections(null, room3, null, room1);*/
-        /*room3.setConnections(null, null, room6, room2);
-        room4.setConnections(room1, null, room7, null);
-        room5.setConnections(null, null, room8, null);
-        room6.setConnections(room3, null, room9, null);
-        room7.setConnections(room4, room8, null, null);
-        room8.setConnections(room5, room9, null, room7);
-        room9.setConnections(room6, null, null, room8);*/
-
-
         // Intro
         System.out.println("Welcome to the adventure game.");
 
 
         // Start
-        System.out.println("\nYou wake up on the side of a dirt path, your only options are: to head east or: to head south.");
+        System.out.println("\nYou wake up on the side of a dirt path, your only options are: to head east, or: to head south.");
         System.out.print("Which way do you want to go? ");
 
 

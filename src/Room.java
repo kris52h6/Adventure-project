@@ -5,17 +5,12 @@ public class Room {
     private Room south;
     private Room west;
     private String description;
+    private boolean activeRoom;
 
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
-    }
-
-    public void setConnections(Room north, Room east, Room south, Room west) {
-        this.north = north;
-        this.east = east;
-        this.south = south;
-        this.west = west;
+        this.activeRoom = false;
     }
 
     // Connects "horizontally" by setting east = nextRoom &
@@ -34,6 +29,18 @@ public class Room {
             south = nextRoom;
             nextRoom.setNorth(this);
         }
+    }
+
+    public boolean getActiveRoom() {
+        return activeRoom;
+    }
+
+    public boolean switchMap() {
+        if (activeRoom) {
+            this.activeRoom = false;
+        } else
+            this.activeRoom = true;
+        return activeRoom;
     }
 
     public String getName() {
