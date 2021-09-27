@@ -8,21 +8,16 @@ public class Adventure {
         // Create rooms
         Room room1 = new Room("room1", "You're back where you started, at the dirt path.");
         Room room2 = new Room("room2", "You're at a river, flowing with violent waves");
-        Room room3 = new Room("room3", "haunted house");
-        Room room4 = new Room("room4", "gloomy forest");
-        Room room5 = new Room("room5", "treasure room");
-        Room room6 = new Room("room6", "ass");
-        Room room7 = new Room("room7", "dark alley");
-        Room room8 = new Room("room8", "twisted bushes");
-        Room room9 = new Room("room9", "SPURGT MAND");
+        Room room3 = new Room("room3", "You pass a scary looking house.");
+        Room room4 = new Room("room4", "You enter a gloomy forest.");
+        Room room5 = new Room("room5", "You enter a treasure room. What could be hiding here?");
+        Room room6 = new Room("room6", "You pass a scary tree.");
+        Room room7 = new Room("room7", "You're at a dark alley, around you are a bunch of sketchy looking people.");
+        Room room8 = new Room("room8", "You enter a small building, to the north of you, is a special looking door.");
+        Room room9 = new Room("room9", "You enter a small tavern.");
 
         Room currentRoom = room1;
 
-        // map test (extra)
-        System.out.println(currentRoom.getActiveRoom());
-        currentRoom.switchMap();
-        System.out.println(currentRoom.getActiveRoom());
-        //
 
         // Connect rooms
         // connect r1 with r2/r4
