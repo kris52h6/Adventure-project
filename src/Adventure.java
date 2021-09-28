@@ -20,8 +20,7 @@ public class Adventure {
         Map map = new Map();
         Room currentRoom = map.getCurrentRoom();
 
-/*        Player player = new Player(currentRoom);
-        System.out.println(player.getCurrentRoom());*/
+        Player player = new Player(currentRoom);
 
 
         // Player move / interaction
@@ -34,8 +33,8 @@ public class Adventure {
                         System.out.println("\nYou cannot go this way");
                     }
                     else {
-                        System.out.println("\nGoing north");
                         currentRoom = currentRoom.getNorth();
+                        player.setCurrentRoom(currentRoom);
                         System.out.println(currentRoom.getDescription());
                     }
                 }
@@ -43,8 +42,8 @@ public class Adventure {
                     if (currentRoom.getEast() == null) {
                         System.out.println("\nYou cannot go this way");
                     } else {
-                        System.out.println("\nGoing east");
                         currentRoom = currentRoom.getEast();
+                        player.setCurrentRoom(currentRoom);
                         System.out.println(currentRoom.getDescription());
                     }
                 }
@@ -53,8 +52,8 @@ public class Adventure {
                     if (currentRoom.getSouth() == null) {
                         System.out.println("\nYou cannot go this way");
                     } else {
-                        System.out.println("\nGoing south");
                         currentRoom = currentRoom.getSouth();
+                        player.setCurrentRoom(currentRoom);
                         System.out.println(currentRoom.getDescription());
                     }
                 }
@@ -63,8 +62,8 @@ public class Adventure {
                     if (currentRoom.getWest() == null) {
                         System.out.println("\nYou cannot go this way");
                     } else {
-                        System.out.println("\nGoing west");
                         currentRoom = currentRoom.getWest();
+                        player.setCurrentRoom(currentRoom);
                         System.out.println(currentRoom.getDescription());
                     }
                 }
@@ -72,7 +71,6 @@ public class Adventure {
                 // if player looks
                 case "look", "looking" -> {
                     System.out.println(currentRoom.getDescription());
-
                 }
 
                 // exit program

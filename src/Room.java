@@ -69,6 +69,10 @@ public class Room {
         this.west = west;
     }
 
+    public void movePlayer(Room direction) {
+
+    }
+
     @Override
     public String toString() {
         return "Room{" +

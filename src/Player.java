@@ -1,4 +1,4 @@
-/*public class Player {
+public class Player {
     private Room currentRoom;
 
 
@@ -10,4 +10,8 @@
         return currentRoom;
     }
 
-}*/
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+
+}
