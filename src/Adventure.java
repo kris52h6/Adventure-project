@@ -16,7 +16,7 @@ public class Adventure {
         System.out.print("Which way do you want to go? ");
 
 
-        // Build map from Map object
+        // Build map from Map object && player
         Map map = new Map();
         Room currentRoom = map.getCurrentRoom();
 
@@ -26,45 +26,34 @@ public class Adventure {
         // Player move / interaction
         while (true) {
             playerInput = scanner.nextLine();
+            Room requestedRoom = player.currentRoom;
 
             switch (playerInput) {
                 case "go north", "north", "n" -> {
-                    if (currentRoom.getNorth() == null) {
-                        System.out.println("\nYou cannot go this way");
-                    }
-                    else {
-                        currentRoom = currentRoom.getNorth();
-                        player.setCurrentRoom(currentRoom);
-                        System.out.println(currentRoom.getDescription());
+                    requestedRoom = player.changeRoom("n");
+                    if (requestedRoom != null) {
+                        displayRoomDescription(player);
                     }
                 }
+
                 case "go east", "east", "e" -> {
-                    if (currentRoom.getEast() == null) {
-                        System.out.println("\nYou cannot go this way");
-                    } else {
-                        currentRoom = currentRoom.getEast();
-                        player.setCurrentRoom(currentRoom);
-                        System.out.println(currentRoom.getDescription());
+                    requestedRoom = player.changeRoom("e");
+                    if (requestedRoom != null) {
+                        displayRoomDescription(player);
                     }
                 }
 
                 case "go south", "south", "s" -> {
-                    if (currentRoom.getSouth() == null) {
-                        System.out.println("\nYou cannot go this way");
-                    } else {
-                        currentRoom = currentRoom.getSouth();
-                        player.setCurrentRoom(currentRoom);
-                        System.out.println(currentRoom.getDescription());
+                    requestedRoom = player.changeRoom("s");
+                    if (requestedRoom != null) {
+                        displayRoomDescription(player);
                     }
                 }
 
                 case "go west", "west", "w" -> {
-                    if (currentRoom.getWest() == null) {
-                        System.out.println("\nYou cannot go this way");
-                    } else {
-                        currentRoom = currentRoom.getWest();
-                        player.setCurrentRoom(currentRoom);
-                        System.out.println(currentRoom.getDescription());
+                    requestedRoom = player.changeRoom("w");
+                    if (requestedRoom != null) {
+                        displayRoomDescription(player);
                     }
                 }
 
@@ -89,11 +78,25 @@ public class Adventure {
                     System.out.println("\tType 'look', to get a description of the room your currently in");
                     System.out.println("\tType 'exit' to quit the program");
                     System.out.println("\t- Good luck :)\n");
+                    displayRoomDescription(player);
                 }
 
             }
 
+            if (requestedRoom == null) {
+                System.out.println("You cannot go this way");
+            }
+
+
+
         }
+
+
+
+    }
+
+    public static void displayRoomDescription(Player player) {
+        System.out.println(player.getCurrentRoom().getDescription());
 
     }
 

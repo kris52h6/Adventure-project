@@ -1,5 +1,5 @@
 public class Map {
-    private Room currentRoom;
+    public Room currentRoom;
 
     public Map () {
         // Create rooms
@@ -36,6 +36,7 @@ public class Map {
         room7.connectRoomsHorizontally(room8);
         room8.connectRoomsHorizontally(room9);
         room5.connectRoomsVertically(room8);
+
 
     }
 
