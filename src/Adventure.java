@@ -29,6 +29,7 @@ public class Adventure {
             Room requestedRoom = player.currentRoom;
 
             switch (playerInput) {
+                // if player moves north
                 case "go north", "north", "n" -> {
                     requestedRoom = player.changeRoom("n");
                     if (requestedRoom != null) {
@@ -36,6 +37,7 @@ public class Adventure {
                     }
                 }
 
+                // if player moves east
                 case "go east", "east", "e" -> {
                     requestedRoom = player.changeRoom("e");
                     if (requestedRoom != null) {
@@ -43,6 +45,7 @@ public class Adventure {
                     }
                 }
 
+                // if player moves south
                 case "go south", "south", "s" -> {
                     requestedRoom = player.changeRoom("s");
                     if (requestedRoom != null) {
@@ -50,6 +53,7 @@ public class Adventure {
                     }
                 }
 
+                // if player moves west
                 case "go west", "west", "w" -> {
                     requestedRoom = player.changeRoom("w");
                     if (requestedRoom != null) {
@@ -59,7 +63,7 @@ public class Adventure {
 
                 // if player looks
                 case "look", "looking" -> {
-                    System.out.println(currentRoom.getDescription());
+                    displayRoomDescription(player);
                 }
 
                 // exit program
@@ -87,11 +91,7 @@ public class Adventure {
                 System.out.println("You cannot go this way");
             }
 
-
-
         }
-
-
 
     }
 
@@ -99,6 +99,5 @@ public class Adventure {
         System.out.println(player.getCurrentRoom().getDescription());
 
     }
-
 
 }
