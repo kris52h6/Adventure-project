@@ -32,23 +32,21 @@ public class Adventure {
             Room requestedRoom = player.currentRoom;
 
             if (playerInput.contains("take")) {
+                // defines the text followed by "take " as the argument to be sent to findItemFromRoom.
                 int firstSpace = playerInput.indexOf(" ");
                 String objToFind = playerInput.substring(firstSpace + 1);
 
-                Item item = player.findItem(player.currentRoom, objToFind);
+                Item item = player.findItemFromRoom(objToFind);
 
                 if (item != null) {
                     System.out.println("You've picked up the " + item.getItemName());
-
-                    player.addToInventory(item);
-                    player.removeItemFromRoom(item);
                 } else {
                     System.out.println("There's no " + objToFind + " in this room.");
                 }
             }
 
             if (playerInput.contains("drop")) {
-                // TODO drop items
+                // defines the text followed by "drop " as the argument to be sent to findItemFromInventory.
                 int firstSpace = playerInput.indexOf(" ");
                 String objToFind = playerInput.substring(firstSpace + 1);
 
@@ -56,12 +54,9 @@ public class Adventure {
 
                 if (item != null) {
                     System.out.println("You've dropped " + item.getItemName() + " in the current room.");
-                    player.removeItemFromInventory(item);
-                    player.placeItemInRoom(item);
                 } else {
                     System.out.println("You don't have " + objToFind + " in your inventory.");
                 }
-
 
             }
 
@@ -111,34 +106,36 @@ public class Adventure {
 
                 // If player types help
                 case "help", "h", "info" -> {
-                    System.out.println("\nWelcome to the help menu:");
-                    System.out.println("\tType 'go north', to go north");
-                    System.out.println("\tType 'go east', to go east");
-                    System.out.println("\tType 'go south', to go south");
-                    System.out.println("\tType 'go west', to go west");
-                    System.out.println("\tType 'look', to get a description of the room your currently in");
-                    System.out.println("\tType 'exit' to quit the program");
-                    System.out.println("\t- Good luck :)\n");
-                    displayRoomDescription(player);
+                    printHelp(); // prints help
+                    displayRoomDescription(player); // calls description after help
+
                 }
 
                 case "inventory" -> {
-                    // TODO show player inventory
                     System.out.print("Your inventory contains: ");
                     for (int i = 0; i < player.inventory.size(); i++) {
-                        System.out.println(player.inventory.get(i).getItemDescription());
+                        System.out.print(player.inventory.get(i).getItemDescription() + ", ");
                     }
                     System.out.println("\n");
                 }
-
             }
-
             if (requestedRoom == null) {
                 System.out.println("You cannot go this way");
             }
-
         }
+    }
 
+    private static void printHelp() {
+        System.out.println("\nWelcome to the help menu:");
+        System.out.println("\tType 'go north', to go north");
+        System.out.println("\tType 'go east', to go east");
+        System.out.println("\tType 'go south', to go south");
+        System.out.println("\tType 'go west', to go west");
+        System.out.println("\tType 'look', to get a description of the room your currently in");
+        System.out.println("\tType 'exit' to quit the program");
+        System.out.println("\tType 'take' followed by an 'item' to take said item from the current room");
+        System.out.println("\tType 'drop' followed by an 'item' to drop said item in the current room");
+        System.out.println("\t- Good luck :)\n");
     }
 
     public static void displayRoomDescription(Player player) {
@@ -152,8 +149,6 @@ public class Adventure {
             System.out.print(map.getItemDescription(player.getCurrentRoom().items.get(i)) + ", ");
         }
         System.out.println("\n");
-
-
     }
 
 }

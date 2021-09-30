@@ -11,22 +11,21 @@ public class Player {
         this.currentRoom = currentRoom;
     }
 
-    public void addToInventory(Item objectToAdd) {
-        inventory.add(objectToAdd);
+    public void addToInventory(Item item) {
+        inventory.add(item);
     }
 
     public void removeItemFromRoom(Item result) {
         currentRoom.items.remove(result);
-/*
-        items.remove(result);
-*/
     }
 
-    public Item findItem(Room currentRoom, String objToFind) {
+    public Item findItemFromRoom(String objToFind) {
         Item result = null;
         for (int i = 0; i < currentRoom.items.size(); i++ ) {
             if (currentRoom.items.get(i).getItemName().equals(objToFind)) {
                 result = currentRoom.items.get(i);
+                addToInventory(result);
+                removeItemFromRoom(result);
             }
         }
         return result;
@@ -45,9 +44,8 @@ public class Player {
         for (int i = 0; i < inventory.size(); i++) {
             if (inventory.get(i).getItemName().equals(objToFind)) {
                 result = inventory.get(i);
-                System.out.println("you have said item");
-            } else {
-                System.out.println("you don't have said item");
+                removeItemFromInventory(result);
+                placeItemInRoom(result);
             }
         }
         return result;
