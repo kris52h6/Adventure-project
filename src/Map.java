@@ -17,12 +17,14 @@ public class Map {
         currentRoom = room1;
 
 
+
         Item item = new Item("lamp", "a shiny lamp");
         room1.items.add(item);
 
 
         Item item2 = new Item("knife", "an ugly knife");
         room1.items.add(item2);
+
 
         Item item3 = new Item("hat", "a blue wizard hat");
         room2.items.add(item3);

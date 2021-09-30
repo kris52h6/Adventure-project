@@ -32,6 +32,12 @@ public class Adventure {
             playerInput = scanner.nextLine();
             Room requestedRoom = player.currentRoom;
 
+            if (playerInput.contains("take")) {
+                String objToFind = playerInput.substring(5);
+                player.currentRoom.findItem(player.currentRoom, objToFind);
+
+            }
+
             switch (playerInput) {
                 // if player moves north
                 case "go north", "north", "n" -> {
@@ -90,30 +96,24 @@ public class Adventure {
                 }
 
                 case "inventory" -> {
-                    // show inventory
+                    // TODO show player inventory
                 }
 
-                case "take" -> {
+/*                case "take" -> {
                     // pick up an item
+                    String nameTest = "lamp";
+                    player.currentRoom.findItem(player.currentRoom, nameTest);
+*//*
                     player.currentRoom.removeItem(player.currentRoom);
-/*
-                    map.takeItem(player.currentRoom, player.currentRoom.items.get(0));
-*/
+*//*
 
                     // theres no such thing in the room
-                }
 
-                case "take lamp" -> {
-/*
-                    map.takeItem(player.currentRoom, player.currentRoom.items.get());
-*/
-                    /*map.takeItem(player.currentRoom, player.currentRoom.items.get(0).getItemName());*/
-                }
+                }*/
 
                 case "drop" -> {
-                    // drop an item
-
-                    // you dont have an ... in your inventory
+                    // TODO drop an item
+                    // TODO you dont have an ... in your inventory
                 }
             }
 
@@ -127,7 +127,8 @@ public class Adventure {
 
     public static void displayRoomDescription(Player player) {
         // print description
-        System.out.println(player.getCurrentRoom().getDescription());
+        String roomDescription = player.getCurrentRoom().getDescription();
+        System.out.println(roomDescription);
 
         // print items
         System.out.print("The room contains: ");

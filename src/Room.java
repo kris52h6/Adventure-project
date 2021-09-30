@@ -103,19 +103,21 @@ public class Room {
         this.west = west;
     }
 
-    public void removeItem(Room currentRoom) {
-        System.out.println(currentRoom.items);
-        for (int i = 0; i < currentRoom.items.size(); i++ ) {
-            if (currentRoom.items.get(i).getItemName().contains("lamp")) {
-                System.out.println("there is a lamp");
-                currentRoom.items.remove(i);
-            } else {
-                System.out.println("theres no lamp");
-            }
-        }
-
+    public void takeItem(Room currentRoom, Item i) {
+        currentRoom.items.remove(i);
     }
 
+    public void findItem(Room currentRoom, String nameTest) {
+        System.out.println(currentRoom.items);
+        for (int i = 0; i < currentRoom.items.size(); i++ ) {
+            if (currentRoom.items.get(i).getItemName().contains(nameTest)) {
+                System.out.println("You've picked up " + nameTest);
+                takeItem(currentRoom ,currentRoom.items.get(i));
+            } else {
+                System.out.println("There's no " + nameTest);
+            }
+        }
+    }
 
     @Override
     public String toString() {
