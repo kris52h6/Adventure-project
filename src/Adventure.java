@@ -1,9 +1,8 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Adventure {
 
-    private static Map map = new Map();
+    private static final Map map = new Map();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -33,8 +32,36 @@ public class Adventure {
             Room requestedRoom = player.currentRoom;
 
             if (playerInput.contains("take")) {
-                String objToFind = playerInput.substring(5);
-                player.currentRoom.findItem(player.currentRoom, objToFind);
+                int firstSpace = playerInput.indexOf(" ");
+                String objToFind = playerInput.substring(firstSpace + 1);
+
+                Item item = player.findItem(player.currentRoom, objToFind);
+
+                if (item != null) {
+                    System.out.println("You've picked up the " + item.getItemName());
+
+                    player.addToInventory(item);
+                    player.removeItemFromRoom(item);
+                } else {
+                    System.out.println("There's no " + objToFind + " in this room.");
+                }
+            }
+
+            if (playerInput.contains("drop")) {
+                // TODO drop items
+                int firstSpace = playerInput.indexOf(" ");
+                String objToFind = playerInput.substring(firstSpace + 1);
+
+                Item item = player.findItemFromInventory(objToFind);
+
+                if (item != null) {
+                    System.out.println("You've dropped " + item.getItemName() + " in the current room.");
+                    player.removeItemFromInventory(item);
+                    player.placeItemInRoom(item);
+                } else {
+                    System.out.println("You don't have " + objToFind + " in your inventory.");
+                }
+
 
             }
 
@@ -97,24 +124,13 @@ public class Adventure {
 
                 case "inventory" -> {
                     // TODO show player inventory
+                    System.out.print("Your inventory contains: ");
+                    for (int i = 0; i < player.inventory.size(); i++) {
+                        System.out.println(player.inventory.get(i).getItemDescription());
+                    }
+                    System.out.println("\n");
                 }
 
-/*                case "take" -> {
-                    // pick up an item
-                    String nameTest = "lamp";
-                    player.currentRoom.findItem(player.currentRoom, nameTest);
-*//*
-                    player.currentRoom.removeItem(player.currentRoom);
-*//*
-
-                    // theres no such thing in the room
-
-                }*/
-
-                case "drop" -> {
-                    // TODO drop an item
-                    // TODO you dont have an ... in your inventory
-                }
             }
 
             if (requestedRoom == null) {
@@ -133,9 +149,9 @@ public class Adventure {
         // print items
         System.out.print("The room contains: ");
         for (int i = 0; i < player.getCurrentRoom().items.size(); i++) {
-            System.out.print(map.getItemName(player.getCurrentRoom().items.get(i)) + ", ");
+            System.out.print(map.getItemDescription(player.getCurrentRoom().items.get(i)) + ", ");
         }
-
+        System.out.println("\n");
 
 
     }

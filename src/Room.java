@@ -1,14 +1,12 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Room {
-    private String name;
+    private final String name;
     private Room north;
     private Room east;
     private Room south;
     private Room west;
-    private String description;
+    private final String description;
 
     ArrayList<Item> items = new ArrayList<>();
 
@@ -54,15 +52,6 @@ public class Room {
         }
     }
 
-    // Connects "vertically" by setting south = nextRoom &
-    // setting nextRoom's north to this (current object)
-    public void connectRoomsVertically(Room nextRoom) {
-        if (south == null) {
-            south = nextRoom;
-            nextRoom.setNorth(this);
-        }
-    }
-
     public String getName() {
         return name;
     }
@@ -103,21 +92,6 @@ public class Room {
         this.west = west;
     }
 
-    public void takeItem(Room currentRoom, Item i) {
-        currentRoom.items.remove(i);
-    }
-
-    public void findItem(Room currentRoom, String nameTest) {
-        System.out.println(currentRoom.items);
-        for (int i = 0; i < currentRoom.items.size(); i++ ) {
-            if (currentRoom.items.get(i).getItemName().contains(nameTest)) {
-                System.out.println("You've picked up " + nameTest);
-                takeItem(currentRoom ,currentRoom.items.get(i));
-            } else {
-                System.out.println("There's no " + nameTest);
-            }
-        }
-    }
 
     @Override
     public String toString() {

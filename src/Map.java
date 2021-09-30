@@ -62,23 +62,8 @@ public class Map {
         return item.getItemName();
     }
 
-    public void removeItem() {
-
+    public String getItemDescription(Item item) {
+        return item.getItemDescription();
     }
-
-/*    public void takeItem(Room currentRoom, String item) {
-        System.out.println(currentRoom.items);
-        System.out.println(item);
-        for (int i = 0; i < currentRoom.items.size(); i++) {
-            if (currentRoom.items.get(i).getItemName().contains(item)) {
-                currentRoom.items.remove(item);
-            }
-        }*/
-/*        if (currentRoom.items.contains(item)) {
-            System.out.println("hej");
-            currentRoom.items.remove(item);
-        }*/
-
-
 
 }
