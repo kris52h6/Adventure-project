@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Adventure {
+
+    private static Map map = new Map();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -15,9 +18,10 @@ public class Adventure {
         System.out.println("\nYou wake up on the side of a dirt path, your only options are: to head east, or: to head south.");
         System.out.print("Which way do you want to go? ");
 
+        System.out.println();
+
 
         // Build map from Map object && player
-        Map map = new Map();
         Room currentRoom = map.getCurrentRoom();
 
         Player player = new Player(currentRoom);
@@ -85,6 +89,32 @@ public class Adventure {
                     displayRoomDescription(player);
                 }
 
+                case "inventory" -> {
+                    // show inventory
+                }
+
+                case "take" -> {
+                    // pick up an item
+                    player.currentRoom.removeItem(player.currentRoom);
+/*
+                    map.takeItem(player.currentRoom, player.currentRoom.items.get(0));
+*/
+
+                    // theres no such thing in the room
+                }
+
+                case "take lamp" -> {
+/*
+                    map.takeItem(player.currentRoom, player.currentRoom.items.get());
+*/
+                    /*map.takeItem(player.currentRoom, player.currentRoom.items.get(0).getItemName());*/
+                }
+
+                case "drop" -> {
+                    // drop an item
+
+                    // you dont have an ... in your inventory
+                }
             }
 
             if (requestedRoom == null) {
@@ -96,7 +126,16 @@ public class Adventure {
     }
 
     public static void displayRoomDescription(Player player) {
+        // print description
         System.out.println(player.getCurrentRoom().getDescription());
+
+        // print items
+        System.out.print("The room contains: ");
+        for (int i = 0; i < player.getCurrentRoom().items.size(); i++) {
+            System.out.print(map.getItemName(player.getCurrentRoom().items.get(i)) + ", ");
+        }
+
+
 
     }
 

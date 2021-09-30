@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Map {
     public Room currentRoom;
 
@@ -12,36 +14,69 @@ public class Map {
         Room room7 = new Room("room7", "You're at a dark alley, around you are a bunch of sketchy looking people.");
         Room room8 = new Room("room8", "You enter a small building, to the north of you, is a special looking door.");
         Room room9 = new Room("room9", "You enter a small tavern.");
-
         currentRoom = room1;
+
+
+        Item item = new Item("lamp", "a shiny lamp");
+        room1.items.add(item);
+
+
+        Item item2 = new Item("knife", "an ugly knife");
+        room1.items.add(item2);
+
+        Item item3 = new Item("hat", "a blue wizard hat");
+        room2.items.add(item3);
+
 
         // Connect rooms
         // connect r1 with r2/r4
-        room1.connectRoomsHorizontally(room2);
-        room1.connectRoomsVertically(room4);
+        room1.connectRoomsEast(room2);
+        room1.connectRoomsSouth(room4);
 
         //connect r2 with r3
-        room2.connectRoomsHorizontally(room3);
+        room2.connectRoomsEast(room3);
 
         // connect r3 with r6
-        room3.connectRoomsVertically(room6);
+        room3.connectRoomsSouth(room6);
 
         // connect r4 with r7
-        room4.connectRoomsVertically(room7);
+        room4.connectRoomsSouth(room7);
 
         // connect r6 with r9
-        room6.connectRoomsVertically(room9);
+        room6.connectRoomsSouth(room9);
 
         // connect r8 with r7/r9/r5
-        room7.connectRoomsHorizontally(room8);
-        room8.connectRoomsHorizontally(room9);
-        room5.connectRoomsVertically(room8);
-
+        room8.connectRoomsWest(room7);
+        room8.connectRoomsEast(room9);
+        room8.connectRoomsNorth(room5);
 
     }
 
     public Room getCurrentRoom() {
         return currentRoom;
     }
+
+    public String getItemName(Item item) {
+        return item.getItemName();
+    }
+
+    public void removeItem() {
+
+    }
+
+/*    public void takeItem(Room currentRoom, String item) {
+        System.out.println(currentRoom.items);
+        System.out.println(item);
+        for (int i = 0; i < currentRoom.items.size(); i++) {
+            if (currentRoom.items.get(i).getItemName().contains(item)) {
+                currentRoom.items.remove(item);
+            }
+        }*/
+/*        if (currentRoom.items.contains(item)) {
+            System.out.println("hej");
+            currentRoom.items.remove(item);
+        }*/
+
+
 
 }
