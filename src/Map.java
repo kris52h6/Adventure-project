@@ -6,51 +6,48 @@ public class Map {
     public Map () {
         // Create rooms
         Room room1 = new Room("room1", "You're back where you started, at the dirt path.");
-        Room room2 = new Room("room2", "You're at a river, flowing with violent waves");
-        Room room3 = new Room("room3", "You pass a scary looking house.");
-        Room room4 = new Room("room4", "You enter a gloomy forest.");
-        Room room5 = new Room("room5", "You enter a treasure room. What could be hiding here?");
-        Room room6 = new Room("room6", "You pass a scary tree.");
-        Room room7 = new Room("room7", "You're at a dark alley, around you are a bunch of sketchy looking people.");
-        Room room8 = new Room("room8", "You enter a small building, to the north of you, is a special looking door.");
-        Room room9 = new Room("room9", "You enter a small tavern.");
+        Room room2 = new Room("room2", "You're at a river, you can take the boat west or enter the boathouse by heading south.");
+        Room room3 = new Room("room3", "You're in a boat house, with gross looking furniture. You think to yourself: 'theres something useful nearby'.");
+        Room room4 = new Room("room4", "You're at a beautiful open grassland with lots of happy bees, in the dirt below you, you see a hidden tunnel. Eerie noises sound from below.");
+        Room room5 = new Room("room5", "You attempt to enter the tunnel, but a giant bear guards the entrance. Perhaps something sweet could distract the bear?");
+
+        Room room6 = new Room("room6", "You're in a forest, to the east, there's a scary looking house. To the south, there's a castle.");
+        Room room7 = new Room("room7", "You're in a house that seems to be haunted, if only you had something to lighten up the place.");
+        Room room8 = new Room("room8", "You're staring inside a tiny closet, with a golden key inside it.");
+
+        Room room9 = new Room("room9", "You're inside the castle. Straight ahead you see a golden door. Perhaps a key could open it?");
+        Room room10 = new Room("room10", "You're inside the treasure room.");
         currentRoom = room1;
 
 
-
-        Item item = new Item("lamp", "a shiny lamp");
-        room1.items.add(item);
-
-
-        Item item2 = new Item("knife", "an ugly knife");
-        room1.items.add(item2);
-
-
-        Item item3 = new Item("hat", "a blue wizard hat");
-        room2.items.add(item3);
+        // creates items in the different rooms
+        room3.addItem("lamp", "a shiny lamp");
+        room8.addItem("key", "a golden key");
+        room4.addItem("honey", "sweet honey");
 
 
         // Connect rooms
-        // connect r1 with r2/r4
-        room1.connectRoomsEast(room2);
-        room1.connectRoomsSouth(room4);
+        // connect r1 with r2/r6
+        room1.connectRoomsWest(room2);
+        room1.connectRoomsEast(room6);
 
-        //connect r2 with r3
-        room2.connectRoomsEast(room3);
+        room2.connectRoomsSouth(room3);
+
+        room3.connectRoomsSouth(room4);
 
         // connect r3 with r6
-        room3.connectRoomsSouth(room6);
+        room4.connectRoomsSouth(room5);
 
         // connect r4 with r7
-        room4.connectRoomsSouth(room7);
+        room6.connectRoomsEast(room7);
 
         // connect r6 with r9
-        room6.connectRoomsSouth(room9);
+        room7.connectRoomsEast(room8);
 
         // connect r8 with r7/r9/r5
-        room8.connectRoomsWest(room7);
-        room8.connectRoomsEast(room9);
-        room8.connectRoomsNorth(room5);
+        room6.connectRoomsSouth(room9);
+        room9.connectRoomsSouth(room10);
+
 
     }
 

@@ -51,6 +51,23 @@ public class Player {
         return result;
     }
 
+    public Item useItemFromInventory(String objToUse) {
+        Item result = null;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i).getItemName().equals(objToUse)) {
+                result = inventory.get(i);
+                useItem(inventory.get(i));
+            }
+        }
+        return result;
+    }
+
+    public void useItem(Item item) {
+        if (item.getItemName().equals("honey") && currentRoom.getName().equals("room5")) {
+            System.out.println("gz");
+        }
+    }
+
     public Room getCurrentRoom() {
         return currentRoom;
     }
@@ -62,6 +79,7 @@ public class Player {
 
 
     public Room changeRoom(String direction) {
+
         switch (direction) {
             case "go north", "north", "n" -> {
                 requestedRoom = this.currentRoom.getNorth();
@@ -75,9 +93,8 @@ public class Player {
             case "go west", "west", "w" -> {
                 requestedRoom = this.currentRoom.getWest();
             }
-
+            
         }
-
         if (requestedRoom != null) {
             this.currentRoom = requestedRoom;
         }

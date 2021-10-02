@@ -92,6 +92,16 @@ public class Room {
         this.west = west;
     }
 
+    public void addItem(Item item) {
+        this.items.add(item);
+    }
+
+    // overload
+    public void addItem(String name, String description) {
+        Item item = new Item(name, description);
+        addItem(item);
+    }
+
 
     @Override
     public String toString() {

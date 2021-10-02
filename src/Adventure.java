@@ -60,6 +60,23 @@ public class Adventure {
 
             }
 
+            if (playerInput.contains("use")) {
+                int firstSpace = playerInput.indexOf(" ");
+                String objToUse = playerInput.substring(firstSpace + 1);
+
+                Item item = player.useItemFromInventory(objToUse);
+
+
+                if (item != null) {
+                    System.out.println("You've used " + item.getItemName());
+                    player.useItem(item);
+                } else {
+                    System.out.println("You don't have " + objToUse + " in your inventory");
+                }
+
+
+            }
+
             switch (playerInput) {
                 // if player moves north
                 case "go north", "north", "n" -> {
@@ -118,6 +135,7 @@ public class Adventure {
                     }
                     System.out.println("\n");
                 }
+
             }
             if (requestedRoom == null) {
                 System.out.println("You cannot go this way");
@@ -135,6 +153,7 @@ public class Adventure {
         System.out.println("\tType 'exit' to quit the program");
         System.out.println("\tType 'take' followed by an 'item' to take said item from the current room");
         System.out.println("\tType 'drop' followed by an 'item' to drop said item in the current room");
+        System.out.println("\tType 'inventory' to view the items you're carrying around.");
         System.out.println("\t- Good luck :)\n");
     }
 
@@ -144,11 +163,17 @@ public class Adventure {
         System.out.println(roomDescription);
 
         // print items
-        System.out.print("The room contains: ");
-        for (int i = 0; i < player.getCurrentRoom().items.size(); i++) {
-            System.out.print(map.getItemDescription(player.getCurrentRoom().items.get(i)) + ", ");
+        if (player.getCurrentRoom().items.size() != 0) {
+            System.out.print("The room contains: ");
+            for (int i = 0; i < player.getCurrentRoom().items.size(); i++) {
+                System.out.print(map.getItemDescription(player.getCurrentRoom().items.get(i)) + ", ");
+            }
+            System.out.println("\n");
+
+        } else {
+            System.out.println("There's no items in this location.");
         }
-        System.out.println("\n");
     }
+
 
 }
