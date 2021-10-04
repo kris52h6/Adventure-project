@@ -31,28 +31,29 @@ public class Map {
 
 
         // Connect rooms
-        // connect r1 with r2/r6
+        // connect dirt path with river / forest
         room1.connectRoomsWest(room2);
         room1.connectRoomsEast(room6);
 
+        // connect river with grassland / boat house
         room2.connectRoomsSouth(room3);
         room2.connectRoomsWest(room4);
 
+        // connect boat house with grasslands
         room3.connectRoomsSouth(room4);
 
-        // connect r3 with r6
+        // connect grasslands with tunnel
         room4.connectRoomsSouth(room5);
 
-        // connect r4 with r7
+        // connect forest with haunted house
         room6.connectRoomsEast(room7);
 
-        // connect r6 with r9
+        // connect haunted house with closet / key room
         room7.connectRoomsEast(room8);
 
-        // connect r8 with r7/r9/r5
+        // forest with casle & castle with treasure room
         room6.connectRoomsSouth(room9);
         room9.connectRoomsSouth(room10);
-
 
     }
 

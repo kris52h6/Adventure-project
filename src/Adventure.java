@@ -36,8 +36,10 @@ public class Adventure {
                 int firstSpace = playerInput.indexOf(" ");
                 String objToFind = playerInput.substring(firstSpace + 1);
 
+                // declares item as the returned value from findItem method
                 Item item = player.findItemFromRoom(objToFind);
 
+                // prints result
                 if (item != null) {
                     System.out.println("You've picked up the " + item.getItemName());
                 } else {
@@ -50,8 +52,10 @@ public class Adventure {
                 int firstSpace = playerInput.indexOf(" ");
                 String objToFind = playerInput.substring(firstSpace + 1);
 
+                // declares item as the returned value from findItem method
                 Item item = player.findItemFromInventory(objToFind);
 
+                // prints result
                 if (item != null) {
                     System.out.println("You've dropped " + item.getItemName() + " in the current room.");
                 } else {
@@ -66,7 +70,6 @@ public class Adventure {
 
                 Item item = player.useItemFromInventory(objToUse);
 
-
                 if (item != null) {
                     System.out.println("\nYou've used " + item.getItemName());
                     player.useItem(item);
@@ -77,7 +80,6 @@ public class Adventure {
                 } else {
                     System.out.println("You don't have " + objToUse + " in your inventory");
                 }
-
 
             }
 
@@ -132,7 +134,8 @@ public class Adventure {
 
                 }
 
-                case "inventory" -> {
+                // If player types inventory
+                case "inventory", "i", "inv" -> {
                     System.out.print("Your inventory contains: ");
                     String items = "";
 
@@ -185,7 +188,7 @@ public class Adventure {
             System.out.println(items);
             System.out.println("\n");
 
-        } else {
+        } else { // if room doesn't have any items
             System.out.println("\tThere's no items in this location.");
         }
     }
