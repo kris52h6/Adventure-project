@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Player {
     public Room currentRoom;
+    public Room startRoom;
     private Room requestedRoom;
 
     ArrayList<Item> inventory = new ArrayList<>();
@@ -9,6 +10,8 @@ public class Player {
 
     public Player(Room currentRoom) {
         this.currentRoom = currentRoom;
+        this.startRoom = currentRoom;
+
     }
 
     public void addToInventory(Item item) {
@@ -64,7 +67,7 @@ public class Player {
 
     public void useItem(Item item) {
         if (item.getItemName().equals("honey") && currentRoom.getName().equals("room5")) {
-            System.out.println("gz");
+            currentRoom = startRoom;
         }
     }
 

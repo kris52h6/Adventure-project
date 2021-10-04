@@ -21,9 +21,13 @@ public class Map {
 
 
         // creates items in the different rooms
-        room3.addItem("lamp", "a shiny lamp");
-        room8.addItem("key", "a golden key");
-        room4.addItem("honey", "sweet honey");
+        room1.addItem("a mighty shovel");
+        room1.addItem("a glorious axe");
+
+        room3.addItem("a shiny lamp");
+        room8.addItem("a golden key");
+        room4.addItem("sweet honey");
+
 
 
         // Connect rooms
@@ -32,6 +36,7 @@ public class Map {
         room1.connectRoomsEast(room6);
 
         room2.connectRoomsSouth(room3);
+        room2.connectRoomsWest(room4);
 
         room3.connectRoomsSouth(room4);
 

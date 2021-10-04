@@ -97,11 +97,17 @@ public class Room {
     }
 
     // overload
-    public void addItem(String name, String description) {
+    public void addItem(String description) {
+        String name = createItemName(description);
         Item item = new Item(name, description);
         addItem(item);
     }
 
+    public String createItemName(String description) {
+        int lastIndexOfSpace = description.lastIndexOf(" ");
+        String name = description.substring(lastIndexOfSpace +1);
+        return name;
+    }
 
     @Override
     public String toString() {

@@ -68,8 +68,12 @@ public class Adventure {
 
 
                 if (item != null) {
-                    System.out.println("You've used " + item.getItemName());
+                    System.out.println("\nYou've used " + item.getItemName());
                     player.useItem(item);
+                    if (objToUse.equals("honey")) {
+                        System.out.println("The honey distracts the bear, allowing you to use the tunnel.\n");
+                    }
+                    displayRoomDescription(player);
                 } else {
                     System.out.println("You don't have " + objToUse + " in your inventory");
                 }
@@ -130,9 +134,14 @@ public class Adventure {
 
                 case "inventory" -> {
                     System.out.print("Your inventory contains: ");
+                    String items = "";
+
                     for (int i = 0; i < player.inventory.size(); i++) {
-                        System.out.print(player.inventory.get(i).getItemDescription() + ", ");
+                        items += player.inventory.get(i).getItemDescription() + ", ";
                     }
+
+                    items = items.substring(0, items.length() -2); // removes comma and space from the last item in the array
+                    System.out.println(items);
                     System.out.println("\n");
                 }
 
@@ -154,6 +163,7 @@ public class Adventure {
         System.out.println("\tType 'take' followed by an 'item' to take said item from the current room");
         System.out.println("\tType 'drop' followed by an 'item' to drop said item in the current room");
         System.out.println("\tType 'inventory' to view the items you're carrying around.");
+        System.out.println("\tType 'use' followed by an 'item' to attempt to use said item in the current room");
         System.out.println("\t- Good luck :)\n");
     }
 
@@ -162,16 +172,21 @@ public class Adventure {
         String roomDescription = player.getCurrentRoom().getDescription();
         System.out.println(roomDescription);
 
+        String items = "";
+
         // print items
         if (player.getCurrentRoom().items.size() != 0) {
-            System.out.print("The room contains: ");
+            System.out.print("\tThe room contains: ");
             for (int i = 0; i < player.getCurrentRoom().items.size(); i++) {
-                System.out.print(map.getItemDescription(player.getCurrentRoom().items.get(i)) + ", ");
+                items += map.getItemDescription(player.getCurrentRoom().items.get(i)) + ", ";
+
             }
+            items = items.substring(0, items.length() -2); // removes comma and space from the last item in the array
+            System.out.println(items);
             System.out.println("\n");
 
         } else {
-            System.out.println("There's no items in this location.");
+            System.out.println("\tThere's no items in this location.");
         }
     }
 
