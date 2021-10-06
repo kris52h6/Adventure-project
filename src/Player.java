@@ -66,7 +66,7 @@ public class Player {
     }
 
     public void useItem(Item item) {
-        if (item.getItemName().equals("honey") && currentRoom.getName().equals("room5")) {
+        if (item.getItemName().equals("honey") && currentRoom.getName().equals("Tunnel")) {
             currentRoom = startRoom;
         }
     }
