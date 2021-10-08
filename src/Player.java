@@ -4,6 +4,7 @@ public class Player {
     public Room currentRoom;
     public Room startRoom;
     private Room requestedRoom;
+    private int health;
 
     ArrayList<Item> inventory = new ArrayList<>();
 
@@ -11,7 +12,7 @@ public class Player {
     public Player(Room currentRoom) {
         this.currentRoom = currentRoom;
         this.startRoom = currentRoom;
-
+        this.health = 100;
     }
 
     public void addToInventory(Item item) {
@@ -79,8 +80,6 @@ public class Player {
         this.currentRoom = currentRoom;
     }
 
-
-
     public Room changeRoom(String direction) {
 
         switch (direction) {
@@ -104,5 +103,21 @@ public class Player {
         return requestedRoom;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public String getHealthStatus() {
+        int health = getHealth();
+        String statusString = "";
+        if (health >= 25) {
+            statusString = "You're low on health, be careful.";
+        } if (health >= 50) {
+            statusString = "You're in decent shape.";
+        } if (health >= 75) {
+            statusString = "You're very healthy.";
+        }
+        return statusString;
+    }
 
 }

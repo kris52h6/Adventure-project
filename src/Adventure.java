@@ -83,6 +83,10 @@ public class Adventure {
 
             }
 
+            if (playerInput.contains("health")) {
+                System.out.println("Health: " + player.getHealth() + " - " +  player.getHealthStatus());
+            }
+
             switch (playerInput) {
                 // if player moves north
                 case "go north", "north", "n" -> {
