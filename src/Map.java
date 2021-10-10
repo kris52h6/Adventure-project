@@ -29,7 +29,12 @@ public class Map {
         room8.addItem("a golden key");
         room4.addItem("sweet honey");
 
+        // create food
+        Food fd = new Food("apple","a red apple", 20, CheckFood.EDIBLE);
+        room1.addItem(fd);
 
+        Food badfood = new Food("cig", "a worn down cigarrete", 40, CheckFood.TOXIC);
+        room1.addItem(badfood);
 
         // Connect rooms
         // connect dirt path with river / forest

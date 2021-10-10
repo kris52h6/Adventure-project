@@ -37,7 +37,9 @@ public class Adventure {
                 String objToFind = playerInput.substring(firstSpace + 1);
 
                 // declares item as the returned value from findItem method
-                Item item = player.findItemFromRoom(objToFind);
+                Item item = player.findItem(player.currentRoom.items,objToFind);
+                System.out.println(item);
+                player.takeItem(item);
 
                 // prints result
                 if (item != null) {
@@ -53,7 +55,8 @@ public class Adventure {
                 String objToFind = playerInput.substring(firstSpace + 1);
 
                 // declares item as the returned value from findItem method
-                Item item = player.findItemFromInventory(objToFind);
+                Item item = player.findItem(player.inventory, objToFind);
+                player.dropItem(item);
 
                 // prints result
                 if (item != null) {
@@ -68,7 +71,8 @@ public class Adventure {
                 int firstSpace = playerInput.indexOf(" ");
                 String objToUse = playerInput.substring(firstSpace + 1);
 
-                Item item = player.useItemFromInventory(objToUse);
+                Item item = player.findItem(player.inventory,objToUse);
+                player.useItem(item);
 
                 if (item != null) {
                     System.out.println("\nYou've used " + item.getItemName());
@@ -83,8 +87,35 @@ public class Adventure {
 
             }
 
-            if (playerInput.contains("health")) {
-                System.out.println("Health: " + player.getHealth() + " - " +  player.getHealthStatus());
+            if (playerInput.contains("eat")) {
+                int firstSpace = playerInput.indexOf(" ");
+                String objToEat = playerInput.substring(firstSpace + 1);
+
+                //TODO right now it only checks player inventory item.
+                // Make it check both player inventory and current rooms items
+                Item item = player.findItem(player.inventory, objToEat);
+
+                if (item != null) { // if item exits
+                    CheckFood checkIfItemIsEdible = player.eatFood(item); // check if the item is edible
+                    int itemHealth = item.getHealthPoints();
+                    if (checkIfItemIsEdible == CheckFood.EDIBLE) { // if add health to player if it is.
+                        System.out.println("ITEM IS EDIBLE!");
+                        System.out.println("You ate " + item.getItemName() + " you gain some health.");
+                        player.addHealthPoints(itemHealth);
+                    } else if (checkIfItemIsEdible == CheckFood.TOXIC) {
+                        System.out.println("ITEM IS TOXIC!");
+                        System.out.println("You ate " + item.getItemName() + " you lose some health." );
+                        player.removeHealthPoints(itemHealth);
+                    }
+
+                    else
+                        System.out.println("ITEM IS INEDIBLE!");
+                }
+                 else {
+                    System.out.println("You don't have " + objToEat + " in your inventory.");
+                }
+                 String currentHealth = "Your current health is: " + player.getHealth();
+                System.out.println(currentHealth);
             }
 
             switch (playerInput) {
@@ -125,6 +156,11 @@ public class Adventure {
                     displayRoomDescription(player);
                 }
 
+                case "health" -> {
+                    String displayHealth = "Health: " + player.getHealth() + " - " +  player.getHealthStatus();
+                    System.out.println(displayHealth);
+                }
+
                 // exit program
                 case "exit", "quit" -> {
                     System.out.println("Killing program...");
@@ -140,16 +176,20 @@ public class Adventure {
 
                 // If player types inventory
                 case "inventory", "i", "inv" -> {
-                    System.out.print("Your inventory contains: ");
-                    String items = "";
+                    if (player.inventory.size() != 0) {
+                        System.out.print("Your inventory contains: ");
+                        String items = "";
 
-                    for (int i = 0; i < player.inventory.size(); i++) {
-                        items += player.inventory.get(i).getItemDescription() + ", ";
+                        for (int i = 0; i < player.inventory.size(); i++) {
+                            items += player.inventory.get(i).getItemDescription() + ", ";
+                        }
+
+                        items = items.substring(0, items.length() - 2); // removes comma and space from the last item in the array
+                        System.out.println(items);
+                        System.out.println("\n");
+                    } else {
+                        System.out.println("Your inventory is empty.");
                     }
-
-                    items = items.substring(0, items.length() -2); // removes comma and space from the last item in the array
-                    System.out.println(items);
-                    System.out.println("\n");
                 }
 
             }

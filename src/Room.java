@@ -103,6 +103,12 @@ public class Room {
         addItem(item);
     }
 
+    public void addItem(String description, int healthPoints) {
+        String name = createItemName(description);
+        Item item = new Item(name, description);
+        addItem(item);
+    }
+
     public String createItemName(String description) {
         int lastIndexOfSpace = description.lastIndexOf(" ");
         String name = description.substring(lastIndexOfSpace +1);
@@ -115,7 +121,5 @@ public class Room {
                 "name='" + name + '\'' +
                 '}';
     }
-
-
 
 }

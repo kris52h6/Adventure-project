@@ -15,55 +15,40 @@ public class Player {
         this.health = 100;
     }
 
-    public void addToInventory(Item item) {
-        inventory.add(item);
-    }
 
     public void removeItemFromRoom(Item result) {
         currentRoom.items.remove(result);
-    }
-
-    public Item findItemFromRoom(String objToFind) {
-        Item result = null;
-        for (int i = 0; i < currentRoom.items.size(); i++ ) {
-            if (currentRoom.items.get(i).getItemName().equals(objToFind)) {
-                result = currentRoom.items.get(i);
-                addToInventory(result);
-                removeItemFromRoom(result);
-            }
-        }
-        return result;
     }
 
     public void placeItemInRoom(Item item) {
         currentRoom.items.add(item);
     }
 
-    public void removeItemFromInventory(Item result) {
-        inventory.remove(result);
+    public void dropItem(Item result) {
+        removeItemFromInventory(result);
+        placeItemInRoom(result);
     }
 
-    public Item findItemFromInventory(String objToFind) {
-        Item result = null;
-        for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i).getItemName().equals(objToFind)) {
-                result = inventory.get(i);
-                removeItemFromInventory(result);
-                placeItemInRoom(result);
-            }
-        }
-        return result;
+    public void removeItemFromInventory(Item item) {
+        inventory.remove(item);
     }
 
-    public Item useItemFromInventory(String objToUse) {
-        Item result = null;
-        for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i).getItemName().equals(objToUse)) {
-                result = inventory.get(i);
-                useItem(inventory.get(i));
+    public void takeItem(Item item) {
+        addItemToInventory(item);
+        removeItemFromRoom(item);
+    }
+
+    public void addItemToInventory(Item item) {
+        inventory.add(item);
+    }
+
+    public Item findItem(ArrayList<Item> list, String itemName) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getItemName().equals(itemName)) {
+                return list.get(i);
             }
         }
-        return result;
+        return null;
     }
 
     public void useItem(Item item) {
@@ -72,6 +57,8 @@ public class Player {
         }
     }
 
+
+    // controls room
     public Room getCurrentRoom() {
         return currentRoom;
     }
@@ -103,6 +90,12 @@ public class Player {
         return requestedRoom;
     }
 
+
+    // Player health
+    public CheckFood eatFood(Item food) {
+        return food.getType();
+    }
+
     public int getHealth() {
         return health;
     }
@@ -118,6 +111,14 @@ public class Player {
             statusString = "You're very healthy.";
         }
         return statusString;
+    }
+
+    public void addHealthPoints(int healthToBeAdded) {
+        this.health += healthToBeAdded;
+    }
+
+    public void removeHealthPoints(int healthToBeRemoved) {
+        this.health -= healthToBeRemoved;
     }
 
 }
