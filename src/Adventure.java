@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Adventure {
@@ -90,10 +91,25 @@ public class Adventure {
             if (playerInput.contains("eat")) {
                 int firstSpace = playerInput.indexOf(" ");
                 String objToEat = playerInput.substring(firstSpace + 1);
+                boolean match = false;
 
                 //TODO right now it only checks player inventory item.
                 // Make it check both player inventory and current rooms items
-                Item item = player.findItem(player.inventory, objToEat);
+                /*Item item = player.findItem(player.inventory, objToEat);*/
+                Item item = null;
+
+                // checks inventory list & current room list for the specific item to eat.
+                while (!match) {
+                    for (int i  = 0; i < 2; i++) {
+                        if (player.findItem(player.currentRoom.items, objToEat) != null) {
+                            item = player.findItem(player.currentRoom.items, objToEat);
+                            match = true;
+                        } else if (player.findItem(player.inventory, objToEat) != null) {
+                            item = player.findItem(player.inventory, objToEat);
+                            match = true;
+                        }
+                    }
+                }
 
                 if (item != null) { // if item exits
                     CheckFood checkIfItemIsEdible = player.eatFood(item); // check if the item is edible
@@ -123,17 +139,11 @@ public class Adventure {
 
                 Item item = player.findItem(player.inventory, objToEquip);
 
-/*                if (item != null) {
-                    player.equipWeapon(item);
-                    System.out.println("You've equipped: " + item.getItemDescription());
-                }*/
-
                 if (item != null) { // if item exits
                     CheckWeapon checkIfItemIsAWeapon = player.equipWeapon(item); // check if the item is weapon
-                    if (checkIfItemIsAWeapon == CheckWeapon.MELEEWEAPON || checkIfItemIsAWeapon == CheckWeapon.SHOOTINGWEAPON ) { 
+                    if (checkIfItemIsAWeapon == CheckWeapon.MELEEWEAPON || checkIfItemIsAWeapon == CheckWeapon.SHOOTINGWEAPON ) {
                         System.out.println("ITEM IS A WEAPON");
                         System.out.println("You equip " + item.getItemName());
-                        //
                     } else if (checkIfItemIsAWeapon == CheckWeapon.NOTWEAPON) {
                         System.out.println("ITEM IS NOT A WEAPON");
                         System.out.println("You can't equip " + item.getItemName() + " it's not a weapon." );
@@ -143,6 +153,26 @@ public class Adventure {
                 else {
                     System.out.println("You don't have " + objToEquip + " in your inventory.");
                 }
+
+            }
+
+
+            if (playerInput.contains("attack")) {
+
+                if (player.getEquippedWeapon() != null) {
+                    String weaponName = player.getEquippedWeapon().getItemName();
+
+                    System.out.println("You attack!");
+                    player.getEquippedWeapon().attack();
+
+                    if (player.getEquippedWeapon().getWeaponType() == CheckWeapon.SHOOTINGWEAPON) {
+                        System.out.println("You shoot your " + weaponName);
+                        System.out.println("You have " + player.getEquippedWeapon().getAmmo() + " ammo left.");
+                    } else {
+                        System.out.println("You swing your " +  weaponName);
+                    }
+                }
+
             }
 
             switch (playerInput) {

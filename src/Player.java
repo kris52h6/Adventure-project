@@ -96,6 +96,7 @@ public class Player {
     // Player health
     public CheckFood eatFood(Item food) {
         removeItemFromInventory(food);
+        removeItemFromRoom(food);
         return food.getFoodType();
     }
 
@@ -125,7 +126,6 @@ public class Player {
     }
 
     // player equipment
-
     public CheckWeapon equipWeapon(Item weapon) {
         this.equippedWeapon = weapon;
         removeItemFromInventory(weapon);
@@ -133,7 +133,7 @@ public class Player {
     }
 
     public Weapon getEquippedWeapon() {
-        return (Weapon) this.equippedWeapon;
+        return (Weapon) equippedWeapon;
     }
 
 }

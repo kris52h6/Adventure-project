@@ -29,16 +29,18 @@ public class Map {
         room4.addItem("sweet honey");
 
         // create food
+/*
         Food fd = new Food("apple","a red apple", 20, CheckFood.EDIBLE);
-        room1.addItem(fd);
+*/
+        room1.addItem("a red apple", 20, CheckFood.EDIBLE);
 
         Food badfood = new Food("cig", "a worn down cigarrete", 40, CheckFood.TOXIC);
         room1.addItem(badfood);
 
 
         // Add weapons
-        MeleeWeapon mlwep = new MeleeWeapon("axe", "a mighty axe", CheckWeapon.MELEEWEAPON);
-        ShootingWeapon shwep = new ShootingWeapon("gun" , "a small gun",CheckWeapon.SHOOTINGWEAPON, 10);
+        MeleeWeapon mlwep = new MeleeWeapon("axe", "a mighty axe", 2, CheckWeapon.MELEEWEAPON);
+        ShootingWeapon shwep = new ShootingWeapon("gun" , "a small gun", 3,CheckWeapon.SHOOTINGWEAPON, 10);
 
         room1.addItem(mlwep);
         room1.addItem(shwep);

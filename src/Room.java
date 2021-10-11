@@ -103,9 +103,10 @@ public class Room {
         addItem(item);
     }
 
-    public void addItem(String description, int healthPoints) {
+    // overload for creating food
+    public void addItem(String description, int healthPoints, CheckFood type) {
         String name = createItemName(description);
-        Item item = new Item(name, description);
+        Food item = new Food(name, description, healthPoints, type);
         addItem(item);
     }
 
