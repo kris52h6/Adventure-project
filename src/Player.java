@@ -5,8 +5,10 @@ public class Player {
     public Room startRoom;
     private Room requestedRoom;
     private int health;
+    private Item equippedWeapon;
 
     ArrayList<Item> inventory = new ArrayList<>();
+    ArrayList<Item> equipmentList = new ArrayList<>();
 
 
     public Player(Room currentRoom) {
@@ -93,7 +95,8 @@ public class Player {
 
     // Player health
     public CheckFood eatFood(Item food) {
-        return food.getType();
+        removeItemFromInventory(food);
+        return food.getFoodType();
     }
 
     public int getHealth() {
@@ -119,6 +122,18 @@ public class Player {
 
     public void removeHealthPoints(int healthToBeRemoved) {
         this.health -= healthToBeRemoved;
+    }
+
+    // player equipment
+
+    public CheckWeapon equipWeapon(Item weapon) {
+        this.equippedWeapon = weapon;
+        removeItemFromInventory(weapon);
+        return weapon.getWeaponType();
+    }
+
+    public Weapon getEquippedWeapon() {
+        return (Weapon) this.equippedWeapon;
     }
 
 }

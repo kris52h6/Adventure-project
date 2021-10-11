@@ -12,9 +12,7 @@ public class Food extends Item {
         return healthPoints;
     }
 
-
-
-    public CheckFood getType() {
+    public CheckFood getFoodType() {
         return type;
     }
 

@@ -107,7 +107,6 @@ public class Adventure {
                         System.out.println("You ate " + item.getItemName() + " you lose some health." );
                         player.removeHealthPoints(itemHealth);
                     }
-
                     else
                         System.out.println("ITEM IS INEDIBLE!");
                 }
@@ -116,6 +115,34 @@ public class Adventure {
                 }
                  String currentHealth = "Your current health is: " + player.getHealth();
                 System.out.println(currentHealth);
+            }
+
+            if (playerInput.contains("equip")) {
+                int firstSpace = playerInput.indexOf(" ");
+                String objToEquip = playerInput.substring(firstSpace + 1);
+
+                Item item = player.findItem(player.inventory, objToEquip);
+
+/*                if (item != null) {
+                    player.equipWeapon(item);
+                    System.out.println("You've equipped: " + item.getItemDescription());
+                }*/
+
+                if (item != null) { // if item exits
+                    CheckWeapon checkIfItemIsAWeapon = player.equipWeapon(item); // check if the item is weapon
+                    if (checkIfItemIsAWeapon == CheckWeapon.MELEEWEAPON || checkIfItemIsAWeapon == CheckWeapon.SHOOTINGWEAPON ) { 
+                        System.out.println("ITEM IS A WEAPON");
+                        System.out.println("You equip " + item.getItemName());
+                        //
+                    } else if (checkIfItemIsAWeapon == CheckWeapon.NOTWEAPON) {
+                        System.out.println("ITEM IS NOT A WEAPON");
+                        System.out.println("You can't equip " + item.getItemName() + " it's not a weapon." );
+                    } else
+                        System.out.println("its not a weapon");
+                }
+                else {
+                    System.out.println("You don't have " + objToEquip + " in your inventory.");
+                }
             }
 
             switch (playerInput) {
@@ -189,6 +216,10 @@ public class Adventure {
                         System.out.println("\n");
                     } else {
                         System.out.println("Your inventory is empty.");
+                    }
+
+                    if (player.getEquippedWeapon() != null) {
+                        System.out.println("Your equipped weapon is: " + player.getEquippedWeapon().getItemName());
                     }
                 }
 

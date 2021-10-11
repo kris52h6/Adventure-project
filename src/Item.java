@@ -20,8 +20,13 @@ public class Item {
         return description;
     }
 
-    public CheckFood getType() {
+    public CheckFood getFoodType() {
         CheckFood type = null;
+        return type;
+    }
+
+    public CheckWeapon getWeaponType() {
+        CheckWeapon type = null;
         return type;
     }
 

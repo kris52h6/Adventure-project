@@ -23,7 +23,6 @@ public class Map {
 
         // creates items in the different rooms
         room1.addItem("a mighty shovel");
-        room1.addItem("a glorious axe");
 
         room3.addItem("a shiny lamp");
         room8.addItem("a golden key");
@@ -35,6 +34,15 @@ public class Map {
 
         Food badfood = new Food("cig", "a worn down cigarrete", 40, CheckFood.TOXIC);
         room1.addItem(badfood);
+
+
+        // Add weapons
+        MeleeWeapon mlwep = new MeleeWeapon("axe", "a mighty axe", CheckWeapon.MELEEWEAPON);
+        ShootingWeapon shwep = new ShootingWeapon("gun" , "a small gun",CheckWeapon.SHOOTINGWEAPON, 10);
+
+        room1.addItem(mlwep);
+        room1.addItem(shwep);
+
 
         // Connect rooms
         // connect dirt path with river / forest
