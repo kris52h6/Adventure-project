@@ -21,12 +21,6 @@ public abstract class Weapon extends Item{
         return damage;
     }
 
-   /* public void attack(Enemy enemy) {
-        removeHealth(enemy, damage);
-    }
-
-    public void removeHealth(Enemy enemy, int damage) {
-        enemy.hit(damage);
-    }*/
+    public void attack() {}
 
 }

@@ -27,9 +27,8 @@ public class Enemy {
         } return true;
     }
 
-    public void attack(Player player) {
-        // TODO enemy retaliate
-        player.hit(getWeapon().getDamage());
+    public boolean attack(Player player) {
+        return player.hit(getWeapon().getDamage());
     }
 
     public String getName() {
@@ -41,7 +40,6 @@ public class Enemy {
     }
 
     public void die() {
-        // TODO: enemy dies
         dropWeapon(weapon);
         currentRoom.removeEnemy(this);
     }

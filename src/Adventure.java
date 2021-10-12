@@ -15,7 +15,7 @@ public class Adventure {
 
 
         // Start
-        System.out.println("\nYou wake up on the side of a dirt path, your only options are: to head east, or: to head south.");
+        System.out.println("\nYou wake up on the side of a dirt path, your only options are: to head west, or: to head east.");
         System.out.print("Which way do you want to go? ");
 
         System.out.println();
@@ -39,7 +39,6 @@ public class Adventure {
 
                 // declares item as the returned value from findItem method
                 Item item = player.findItem(player.currentRoom.items,objToFind);
-                System.out.println(item);
                 player.takeItem(item);
 
                 // prints result
@@ -101,6 +100,7 @@ public class Adventure {
                         if (player.findItem(player.currentRoom.items, objToEat) != null) {
                             item = player.findItem(player.currentRoom.items, objToEat);
                             match = true;
+
                         } else if (player.findItem(player.inventory, objToEat) != null) {
                             item = player.findItem(player.inventory, objToEat);
                             match = true;
@@ -109,19 +109,22 @@ public class Adventure {
                 }
 
                 if (item != null) { // if item exits
-                    CheckFood checkIfItemIsEdible = player.eatFood(item); // check if the item is edible
+                    CheckFood checkIfItemIsEdible = player.checkFoodType(item); // check if the item is edible
                     int itemHealth = item.getHealthPoints();
-                    if (checkIfItemIsEdible == CheckFood.EDIBLE) { // if add health to player if it is.
-                        System.out.println("ITEM IS EDIBLE!");
+
+                    if (checkIfItemIsEdible == CheckFood.EDIBLE) { // if food is edible
+                        player.eatFood(item);
                         System.out.println("You ate " + item.getItemName() + " you gain some health.");
                         player.addHealthPoints(itemHealth);
-                    } else if (checkIfItemIsEdible == CheckFood.TOXIC) {
-                        System.out.println("ITEM IS TOXIC!");
+
+                    } else if (checkIfItemIsEdible == CheckFood.TOXIC) { // if food is edible, but toxic
+                        player.eatFood(item);
                         System.out.println("You ate " + item.getItemName() + " you lose some health." );
                         player.removeHealthPoints(itemHealth);
                     }
-                    else
-                        System.out.println("ITEM IS INEDIBLE!");
+                    else {
+                        System.out.println(item.getItemName() + " is inedible!");
+                    }
                 }
                  else {
                     System.out.println("You don't have " + objToEat + " in your inventory.");
@@ -139,7 +142,6 @@ public class Adventure {
                 if (item != null) { // if item exits
                     CheckWeapon checkIfItemIsAWeapon = player.equipWeapon(item); // check if the item is weapon
                     if (checkIfItemIsAWeapon == CheckWeapon.MELEEWEAPON || checkIfItemIsAWeapon == CheckWeapon.SHOOTINGWEAPON ) {
-                        System.out.println("ITEM IS A WEAPON");
                         System.out.println("You equip " + item.getItemName());
                     } else if (checkIfItemIsAWeapon == CheckWeapon.NOTWEAPON) {
                         System.out.println("ITEM IS NOT A WEAPON");
@@ -169,34 +171,42 @@ public class Adventure {
 
                         // checks if the enemy exists in the room
                         if (enemy != null) {
-                            System.out.println("You attack the " + objToAttack);
-                            boolean enemyAlive = player.attack(enemy);
+                            System.out.println("You attack the " + objToAttack + " with your " + weaponName + ".");
+                            boolean enemyAlive = player.attack(enemy);  // attacks enemy and returns boolean to check if enemy is alive.
                             String enemyHealthRemaining = objToAttack + " has " + enemy.getHealth() + " health remaining";
                             System.out.println(enemyHealthRemaining);
 
                             // if enemy is alive after player attack. it retaliates and attacks the player
                             if (enemyAlive) {
-                                enemy.attack(player);
-                                String playerHealthRemaining = "You've " + player.getHealth() + " health remaining, " + player.getHealthStatus();
-                                System.out.println(playerHealthRemaining);
-                            }
-                            // if enemy is dead
+                                boolean playerAlive = enemy.attack(player); // attack player and returns boolean to check if player is alive
+                                String enemyRetaliation = "The " + objToAttack + " fights back, hitting you with its " + enemy.getWeapon().getItemName();
+                                System.out.println(enemyRetaliation);
+
+                                if (playerAlive) {
+                                    String playerHealthRemaining = "You've " + player.getHealth() + " health remaining, " + player.getHealthStatus();
+                                    System.out.println(playerHealthRemaining);
+                                } else if (!playerAlive) {
+                                    System.out.println("You've died. Scrub");
+                                    System.exit(0);
+                                }
+
+                            }// if enemy is dead
                             else {
                                 System.out.println(objToAttack + " has died");
                             }
-                        }
-                        // if theres no enemy matching the player input
+
+                        }// if theres no enemy matching the player input
                         else {
                             System.out.println("There's no enemy named " + objToAttack + " in this room!");
                         }
-                    }
-                    // if theres no ammo in the equipped weapon
+
+                    } // if theres no ammo in the equipped weapon
                     else {
                         System.out.println("You have no ammo!");
                     }
-                }
+
                 // if player has no weapon equipped
-                else {
+                } else {
                     System.out.println("You have no weapon");
                 }
 

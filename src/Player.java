@@ -8,7 +8,6 @@ public class Player {
     private Weapon equippedWeapon;
 
     ArrayList<Item> inventory = new ArrayList<>();
-    ArrayList<Item> equipmentList = new ArrayList<>();
 
 
     public Player(Room currentRoom) {
@@ -16,7 +15,6 @@ public class Player {
         this.startRoom = currentRoom;
         this.health = 100;
     }
-
 
     public void removeItemFromRoom(Item result) {
         currentRoom.items.remove(result);
@@ -103,10 +101,13 @@ public class Player {
 
 
     // Player health
-    public CheckFood eatFood(Item food) {
+    public CheckFood checkFoodType(Item food) {
+        return food.getFoodType();
+    }
+
+    public void eatFood(Item food) {
         removeItemFromInventory(food);
         removeItemFromRoom(food);
-        return food.getFoodType();
     }
 
     public int getHealth() {
@@ -147,11 +148,11 @@ public class Player {
 
     // attack methods
     public boolean attack(Enemy enemy) {
+        equippedWeapon.attack();
         return enemy.hit(getEquippedWeapon().getDamage());
     }
 
     public boolean hit(int damage) {
-        // TODO PLAYER GETS HIT
         if (this.health > 0) {
             this.health -= damage;
             if (this.health <= 0) {

@@ -34,25 +34,27 @@ public class Map {
 */
         room1.addItem("a red apple", 20, CheckFood.EDIBLE);
 
-        Food badfood = new Food("cig", "a worn down cigarrete", 40, CheckFood.TOXIC);
+        Food badfood = new Food("cig", "a worn down cig", 40, CheckFood.TOXIC);
         room1.addItem(badfood);
 
 
         // Add weapons
         MeleeWeapon mlwep1 = new MeleeWeapon("axe", "a mighty axe", 2, CheckWeapon.MELEEWEAPON);
-        ShootingWeapon shwep = new ShootingWeapon("gun" , "a small gun", 3,CheckWeapon.SHOOTINGWEAPON, 10);
+        ShootingWeapon shwep = new ShootingWeapon("gun" , "a small gun", 3,CheckWeapon.SHOOTINGWEAPON, 5);
+        MeleeWeapon excalibur = new MeleeWeapon("excalibur", "the glorious excalibur", 30, CheckWeapon.MELEEWEAPON);
+        MeleeWeapon knife = new MeleeWeapon("knife", "a small kitchen knife", 3, CheckWeapon.MELEEWEAPON);
+        MeleeWeapon club = new MeleeWeapon("club", "a humongous club", 15, CheckWeapon.MELEEWEAPON);
 
         room1.addItem(mlwep1);
         room1.addItem(shwep);
+        room8.addItem(excalibur);
 
-        // create enemies
-        MeleeWeapon mlwep2 = new MeleeWeapon("knife", "a small kitchen knife", 3, CheckWeapon.MELEEWEAPON);
-        Enemy enemy1 = new Enemy("bandit", "a grimy bandit", 20, mlwep2, room1);
-        System.out.println(enemy1);
-
+        // create enemies & add them to rooms
+        Enemy enemy1 = new Enemy("bandit", "a grimy bandit", 20, knife, room1);
         room1.addEnemy(enemy1);
 
-
+        Enemy ogre = new Enemy("ogre", "a humongous ogre", 100, club, room9);
+        room9.addEnemy(ogre);
 
 
         // Connect rooms
