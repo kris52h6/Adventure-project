@@ -309,6 +309,9 @@ public class Adventure {
         System.out.println("\tType 'drop' followed by an 'item' to drop said item in the current room");
         System.out.println("\tType 'inventory' to view the items you're carrying around.");
         System.out.println("\tType 'use' followed by an 'item' to attempt to use said item in the current room");
+        System.out.println("\tType 'eat' followed by an 'item' to attempt to eat said item in the current room");
+        System.out.println("\tType 'equip' followed by an 'weapon' to attempt to equip said weapon in your inventory");
+        System.out.println("\tType 'attack' followed by an 'enemy' to attempt attack said enemy in the current room");
         System.out.println("\t- Good luck :)\n");
     }
 
