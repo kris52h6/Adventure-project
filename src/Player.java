@@ -5,7 +5,7 @@ public class Player {
     public Room startRoom;
     private Room requestedRoom;
     private int health;
-    private Item equippedWeapon;
+    private Weapon equippedWeapon;
 
     ArrayList<Item> inventory = new ArrayList<>();
     ArrayList<Item> equipmentList = new ArrayList<>();
@@ -47,6 +47,15 @@ public class Player {
     public Item findItem(ArrayList<Item> list, String itemName) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getItemName().equals(itemName)) {
+                return list.get(i);
+            }
+        }
+        return null;
+    }
+
+    public Enemy findEnemy(ArrayList<Enemy> list, String itemName) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getName().equals(itemName)) {
                 return list.get(i);
             }
         }
@@ -126,14 +135,29 @@ public class Player {
     }
 
     // player equipment
-    public CheckWeapon equipWeapon(Item weapon) {
+    public CheckWeapon equipWeapon(Weapon weapon) {
         this.equippedWeapon = weapon;
         removeItemFromInventory(weapon);
         return weapon.getWeaponType();
     }
 
     public Weapon getEquippedWeapon() {
-        return (Weapon) equippedWeapon;
+        return equippedWeapon;
+    }
+
+    // attack methods
+    public boolean attack(Enemy enemy) {
+        return enemy.hit(getEquippedWeapon().getDamage());
+    }
+
+    public boolean hit(int damage) {
+        // TODO PLAYER GETS HIT
+        if (this.health > 0) {
+            this.health -= damage;
+            if (this.health <= 0) {
+                return false;
+            }
+        } return true;
     }
 
 }

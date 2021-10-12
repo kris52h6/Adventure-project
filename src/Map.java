@@ -39,11 +39,20 @@ public class Map {
 
 
         // Add weapons
-        MeleeWeapon mlwep = new MeleeWeapon("axe", "a mighty axe", 2, CheckWeapon.MELEEWEAPON);
+        MeleeWeapon mlwep1 = new MeleeWeapon("axe", "a mighty axe", 2, CheckWeapon.MELEEWEAPON);
         ShootingWeapon shwep = new ShootingWeapon("gun" , "a small gun", 3,CheckWeapon.SHOOTINGWEAPON, 10);
 
-        room1.addItem(mlwep);
+        room1.addItem(mlwep1);
         room1.addItem(shwep);
+
+        // create enemies
+        MeleeWeapon mlwep2 = new MeleeWeapon("knife", "a small kitchen knife", 3, CheckWeapon.MELEEWEAPON);
+        Enemy enemy1 = new Enemy("bandit", "a grimy bandit", 20, mlwep2, room1);
+        System.out.println(enemy1);
+
+        room1.addEnemy(enemy1);
+
+
 
 
         // Connect rooms
@@ -75,14 +84,6 @@ public class Map {
 
     public Room getCurrentRoom() {
         return currentRoom;
-    }
-
-    public String getItemName(Item item) {
-        return item.getItemName();
-    }
-
-    public String getItemDescription(Item item) {
-        return item.getItemDescription();
     }
 
 

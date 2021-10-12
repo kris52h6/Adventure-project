@@ -13,7 +13,7 @@ public abstract class Weapon extends Item{
     }
 
     public int getAmmo() {
-        int ammo = 0;
+        int ammo = 10000;
         return ammo;
     }
 
@@ -21,8 +21,12 @@ public abstract class Weapon extends Item{
         return damage;
     }
 
-    public void attack() {
-
+   /* public void attack(Enemy enemy) {
+        removeHealth(enemy, damage);
     }
+
+    public void removeHealth(Enemy enemy, int damage) {
+        enemy.hit(damage);
+    }*/
 
 }

@@ -9,6 +9,7 @@ public class Room {
     private final String description;
 
     ArrayList<Item> items = new ArrayList<>();
+    ArrayList<Enemy> enemies = new ArrayList<>();
 
 
     public Room(String name, String description) {
@@ -114,6 +115,16 @@ public class Room {
         int lastIndexOfSpace = description.lastIndexOf(" ");
         String name = description.substring(lastIndexOfSpace +1);
         return name;
+    }
+
+    // enemies
+
+    public void addEnemy(Enemy enemy) {
+        this.enemies.add(enemy);
+    }
+
+    public void removeEnemy(Enemy enemy) {
+        this.enemies.remove(enemy);
     }
 
     @Override

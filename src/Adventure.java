@@ -93,11 +93,8 @@ public class Adventure {
                 String objToEat = playerInput.substring(firstSpace + 1);
                 boolean match = false;
 
-                //TODO right now it only checks player inventory item.
-                // Make it check both player inventory and current rooms items
-                /*Item item = player.findItem(player.inventory, objToEat);*/
-                Item item = null;
 
+                Item item = null;
                 // checks inventory list & current room list for the specific item to eat.
                 while (!match) {
                     for (int i  = 0; i < 2; i++) {
@@ -137,7 +134,7 @@ public class Adventure {
                 int firstSpace = playerInput.indexOf(" ");
                 String objToEquip = playerInput.substring(firstSpace + 1);
 
-                Item item = player.findItem(player.inventory, objToEquip);
+                Weapon item = (Weapon) player.findItem(player.inventory, objToEquip);
 
                 if (item != null) { // if item exits
                     CheckWeapon checkIfItemIsAWeapon = player.equipWeapon(item); // check if the item is weapon
@@ -158,19 +155,49 @@ public class Adventure {
 
 
             if (playerInput.contains("attack")) {
+                int firstSpace = playerInput.indexOf(" ");
+                String objToAttack = playerInput.substring(firstSpace + 1);
+
+                Enemy enemy = player.findEnemy(player.currentRoom.enemies, objToAttack);
 
                 if (player.getEquippedWeapon() != null) {
                     String weaponName = player.getEquippedWeapon().getItemName();
+                    Weapon weapon = player.getEquippedWeapon();
 
-                    System.out.println("You attack!");
-                    player.getEquippedWeapon().attack();
+                    // checks if weapon has uses
+                    if (weapon.getAmmo() >= 1) {
 
-                    if (player.getEquippedWeapon().getWeaponType() == CheckWeapon.SHOOTINGWEAPON) {
-                        System.out.println("You shoot your " + weaponName);
-                        System.out.println("You have " + player.getEquippedWeapon().getAmmo() + " ammo left.");
-                    } else {
-                        System.out.println("You swing your " +  weaponName);
+                        // checks if the enemy exists in the room
+                        if (enemy != null) {
+                            System.out.println("You attack the " + objToAttack);
+                            boolean enemyAlive = player.attack(enemy);
+                            String enemyHealthRemaining = objToAttack + " has " + enemy.getHealth() + " health remaining";
+                            System.out.println(enemyHealthRemaining);
+
+                            // if enemy is alive after player attack. it retaliates and attacks the player
+                            if (enemyAlive) {
+                                enemy.attack(player);
+                                String playerHealthRemaining = "You've " + player.getHealth() + " health remaining, " + player.getHealthStatus();
+                                System.out.println(playerHealthRemaining);
+                            }
+                            // if enemy is dead
+                            else {
+                                System.out.println(objToAttack + " has died");
+                            }
+                        }
+                        // if theres no enemy matching the player input
+                        else {
+                            System.out.println("There's no enemy named " + objToAttack + " in this room!");
+                        }
                     }
+                    // if theres no ammo in the equipped weapon
+                    else {
+                        System.out.println("You have no ammo!");
+                    }
+                }
+                // if player has no weapon equipped
+                else {
+                    System.out.println("You have no weapon");
                 }
 
             }
@@ -280,23 +307,41 @@ public class Adventure {
         String roomDescription = player.getCurrentRoom().getDescription();
         System.out.println(roomDescription);
 
+        printItems(player, map);
+        printEnemies(player, map);
+    }
+
+    public static void printItems(Player player, Map map) {
         String items = "";
 
         // print items
         if (player.getCurrentRoom().items.size() != 0) {
             System.out.print("\tThe room contains: ");
             for (int i = 0; i < player.getCurrentRoom().items.size(); i++) {
-                items += map.getItemDescription(player.getCurrentRoom().items.get(i)) + ", ";
-
+                items += player.currentRoom.items.get(i).getItemDescription() + ", ";
             }
             items = items.substring(0, items.length() -2); // removes comma and space from the last item in the array
             System.out.println(items);
-            System.out.println("\n");
 
         } else { // if room doesn't have any items
             System.out.println("\tThere's no items in this location.");
         }
     }
 
+    public static void printEnemies(Player player, Map map) {
+        String enemies = "";
 
+        // print enemies
+        if (player.getCurrentRoom().enemies.size() != 0) {
+            System.out.print("\tEnemies in the room: ");
+            for (int i = 0; i < player.getCurrentRoom().enemies.size(); i++) {
+                enemies += player.currentRoom.enemies.get(i).getName() + ", ";
+            }
+            enemies = enemies.substring(0, enemies.length() -2); // removes comma and space from the last enemy in the array
+            System.out.println(enemies);
+
+        } else { // if room doesn't have any enemies
+            System.out.println("\tThere's no enemies in this location.");
+        }
+    }
 }
