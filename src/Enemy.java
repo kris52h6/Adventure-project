@@ -44,6 +44,7 @@ public class Enemy {
         currentRoom.removeEnemy(this);
     }
 
+
     public void dropWeapon(Weapon weapon) {
         currentRoom.items.add(weapon);
     }

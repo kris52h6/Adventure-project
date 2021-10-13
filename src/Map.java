@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-
 public class Map {
-    public Room currentRoom;
+    private final Room startRoom;
 
     public Map () {
         // Create rooms
@@ -17,7 +15,7 @@ public class Map {
 
         Room room9 = new Room("Castle", "You're inside the castle. Straight ahead you see a golden door. Perhaps a key could open it?");
         Room room10 = new Room("Treasure room", "You're inside the treasure room.");
-        currentRoom = room1;
+        startRoom = room1;
 
 
 
@@ -84,8 +82,8 @@ public class Map {
 
     }
 
-    public Room getCurrentRoom() {
-        return currentRoom;
+    public Room getStartRoom() {
+        return startRoom;
     }
 
 

@@ -6,7 +6,6 @@ public class Player {
     private Room requestedRoom;
     private int health;
     private Weapon equippedWeapon;
-
     ArrayList<Item> inventory = new ArrayList<>();
 
 
@@ -50,6 +49,17 @@ public class Player {
         }
         return null;
     }
+
+    /*public Weapon findWeapon(ArrayList<Item> list, String itemName) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getItemName().equals(itemName)) {
+                return (Weapon) list.get(i);
+            }
+        }
+        return null;
+    }*/
+
+
 
     public Enemy findEnemy(ArrayList<Enemy> list, String itemName) {
         for (int i = 0; i < list.size(); i++) {
@@ -136,9 +146,11 @@ public class Player {
     }
 
     // player equipment
-    public CheckWeapon equipWeapon(Weapon weapon) {
-        this.equippedWeapon = weapon;
-        removeItemFromInventory(weapon);
+    public CheckWeapon equipWeapon(Item weapon) {
+        if (weapon.getWeaponType() != null) {
+            this.equippedWeapon = (Weapon) weapon;
+            removeItemFromInventory(weapon);
+        }
         return weapon.getWeaponType();
     }
 

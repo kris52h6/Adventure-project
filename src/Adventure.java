@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Adventure {
@@ -22,7 +21,7 @@ public class Adventure {
 
 
         // Build map from Map object && player
-        Room currentRoom = map.getCurrentRoom();
+        Room currentRoom = map.getStartRoom();
 
         Player player = new Player(currentRoom);
 
@@ -137,7 +136,7 @@ public class Adventure {
                 int firstSpace = playerInput.indexOf(" ");
                 String objToEquip = playerInput.substring(firstSpace + 1);
 
-                Weapon item = (Weapon) player.findItem(player.inventory, objToEquip);
+                Item item = player.findItem(player.inventory, objToEquip);
 
                 if (item != null) { // if item exits
                     CheckWeapon checkIfItemIsAWeapon = player.equipWeapon(item); // check if the item is weapon
@@ -147,14 +146,12 @@ public class Adventure {
                         System.out.println("ITEM IS NOT A WEAPON");
                         System.out.println("You can't equip " + item.getItemName() + " it's not a weapon." );
                     } else
-                        System.out.println("its not a weapon");
+                        System.out.println(objToEquip + " is not a weapon.");
                 }
                 else {
                     System.out.println("You don't have " + objToEquip + " in your inventory.");
                 }
-
             }
-
 
             if (playerInput.contains("attack")) {
                 int firstSpace = playerInput.indexOf(" ");
@@ -180,8 +177,9 @@ public class Adventure {
                             if (enemyAlive) {
                                 boolean playerAlive = enemy.attack(player); // attack player and returns boolean to check if player is alive
                                 String enemyRetaliation = "The " + objToAttack + " fights back, hitting you with its " + enemy.getWeapon().getItemName();
-                                System.out.println(enemyRetaliation);
 
+                                System.out.println("\n");
+                                System.out.println(enemyRetaliation);
                                 if (playerAlive) {
                                     String playerHealthRemaining = "You've " + player.getHealth() + " health remaining, " + player.getHealthStatus();
                                     System.out.println(playerHealthRemaining);

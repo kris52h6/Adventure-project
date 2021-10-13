@@ -1,5 +1,5 @@
 public class Item {
-    private final String name;
+    protected final String name;
     private final String description;
 
     public Item(String name, String description) {
