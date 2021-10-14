@@ -18,18 +18,20 @@ public class Map {
         startRoom = room1;
 
 
+/*        Item item = new Item("shovel", "a mighty shovel");
+        room1.addItem(item);
+
+        Item item2 = new Item("lamp", "a shiny lamp");
+        room3.addItem(item2);*/
 
         // creates items in the different rooms
         room1.addItem("a mighty shovel");
-
         room3.addItem("a shiny lamp");
         room8.addItem("a golden key");
         room4.addItem("sweet honey");
 
+
         // create food
-/*
-        Food fd = new Food("apple","a red apple", 20, CheckFood.EDIBLE);
-*/
         room1.addItem("a red apple", 20, CheckFood.EDIBLE);
 
         Food badfood = new Food("cig", "a worn down cig", 40, CheckFood.TOXIC);

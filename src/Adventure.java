@@ -71,7 +71,9 @@ public class Adventure {
                 String objToUse = playerInput.substring(firstSpace + 1);
 
                 Item item = player.findItem(player.inventory,objToUse);
+/*
                 player.useItem(item);
+*/
 
                 if (item != null) {
                     System.out.println("\nYou've used " + item.getItemName());
@@ -180,10 +182,11 @@ public class Adventure {
 
                                 System.out.println("\n");
                                 System.out.println(enemyRetaliation);
+
                                 if (playerAlive) {
                                     String playerHealthRemaining = "You've " + player.getHealth() + " health remaining, " + player.getHealthStatus();
                                     System.out.println(playerHealthRemaining);
-                                } else if (!playerAlive) {
+                                } else {
                                     System.out.println("You've died. Scrub");
                                     System.exit(0);
                                 }
